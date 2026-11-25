@@ -1,0 +1,12 @@
+[
+  {
+    "FirstName": "Bob",
+    "LastName": "Smith",
+    "GPA": 3.8
+  },
+  {
+    "FirstName": "Sue",
+    "LastName": "Jones",
+    "GPA": 4.0
+  }
+]

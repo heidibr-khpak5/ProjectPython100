@@ -1,0 +1,32 @@
+
+
+
+
+class Recipe:
+    def __init__(
+        self,
+        title,
+        date_found,
+        source,
+        dish_type,
+        ingredients,
+        serving_size,
+        recipe_text,
+        tried=False,
+        rating=None,
+        improvement_notes="",
+        guest_comments=None,
+        notes=""
+    ):
+        self.title = title
+        self.date_found = date_found
+        self.source = source
+        self.dish_type = dish_type
+        self.ingredients = ingredients
+        self.serving_size = serving_size
+        self.recipe_text = recipe_text
+        self.tried = tried
+        self.rating = rating
+        self.improvement_notes = improvement_notes
+        self.guest_comments = guest_comments or []
+        self.notes = notes

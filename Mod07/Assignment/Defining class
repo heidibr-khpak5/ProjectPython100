@@ -1,0 +1,15 @@
+# defining class
+# HBreslauer Nov 24, 2026, created and tried to make it look real with indents etc
+#define Classes
+
+class Person
+    # you can define the arguments here, or bring them in
+    first_name: str="Jim"
+    last_name: str="Morrison"
+
+    #this is for constructors
+    def __init__(self, first_name: str ="",
+                last_name:str=""):
+        self.first_name = first_name
+        self.last_name =last_name
+

@@ -1,0 +1,38 @@
+Thank youj Does notepad have aclipboard or just the one entry
+
+Notepad itself traditionally uses the one Windows clipboard. When you press Ctrl+C again, the previous clipboard contents are replaced.
+
+However, in modern Windows there's a very handy feature called Clipboard History.
+
+Press:
+
+Windows + V
+
+
+The first time, Windows may ask you to enable it.
+
+After that, instead of seeing only the last copied item, you'll see a list of recently copied items. You can click one to paste it.
+
+Examples:
+
+Copy "student_id"
+Copy "birthday"
+Copy "gpa"
+
+Then press:
+
+Windows + V
+
+
+and you'll see all three entries available.
+
+You can even pin frequently used snippets so they stay in the history after a reboot.
+
+For programming, many people find this indispensable because you're constantly copying:
+
+variable names
+code fragments
+error messages
+file paths
+
+If you haven't enabled Clipboard History yet, it's one of those rare Windows features that tends to make life easier rather than more complicated. 😊

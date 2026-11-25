@@ -1,0 +1,151 @@
+Python Cheat Sheet 
+
+shift shift (fast) then search like Settings or Font. 
+undo: ctrl z   -but only works for short while
+
+ctrl /  - comments out a block of code, is a toggle on and off
+
+re-indenting code Ctrl + alt + L This does Reformat code. 
+
+how to fix indents
+
+Running program:
+
+Ctrl+F2 = Stop the running program
+Shift+F9 = Run in Debug mode
+F9 = Resume after hitting a breakpoint
+F8 = Step over
+F7 = Step into
+
+What many people do is:
+
+Run (Shift+F10)
+See a problem
+Ctrl+F2 to stop
+Set a breakpoint
+Shift+F9 to debug
+
+A faster alternative while learning is to simply leave a breakpoint set near the top of main() and always start with Shift+F9. The overhead is usually small, and you can inspect variables whenever you need.
+
+IO
+
+read()        # whole file -> string
+readline()    # one line -> string
+readlines()   # all lines -> list of strings
+
+Dictionary Collection
+# Create data "rows" 
+row1: dict = {"ID": 1, "Name": "Bob Smith", "Email": "BSmith@Notmail.com"} 
+row2: dict = {"ID": 2, "Name": "Sue Jones", "Email": "SueJ@YaYoo.com"} 
+# Create a data "table" 
+table = [row1, row2]
+Column name is "key": case sensitive, use TitleCasing for keys; snake_casing for variabbles;use double quotes  around keys
+print(table)
+
+print values  print(row1.values() )
+print keys    print(row1.keys())
+
+import json
+file=open("data.json", "r")
+data=json.load(file)  # Data is a parsed json  data as Python list of dictionaries
+
+and
+json.dump(students, file)
+file.close()
+
+json.dump()    # write JSON to a file
+json.load()    # read JSON from a file
+json.dumps()   # convert object to JSON string
+json.loads()   # convert JSON string to object
+
+
+
+try except   and then at end
+finally cleanup code
+
+import json
+ 
+infile = None
+ 
+try:
+infile = open("students.json", "r")
+students = json.load(infile)
+ 
+except FileNotFoundError:
+print("File not found")
+ 
+except json.JSONDecodeError:
+print("Invalid JSON")
+ 
+finally:
+if infile is not None:
+infile.close()
+
+The if infile is not None: protects you in case open() failed and the file variable was never assigned.
+
+Class definition: named set of constants, variables, and functions. Example: Exception class. Python automatically
+creates Exception object automatically. We use a variable named "e" to capture a reference to the automatically generated Exception object. "e._str_str() code is a built-in attribute in Py represents the documentation string. 
+
+advanced Exception 
+
+class StudentNotFound(Exception):
+    pass
+
+raise StudentNotFound("ID 12345 not found")
+
+Splitting long Python statements:
+total = (
+	first_number + second_number + third_number +
+	fourth_number + fifth_number
+)
+OR
+ 
+total = first_number + second_number + third_number + \
+	fourth_number + fifth_number
+
+Breaking up long lines:
+message = f"Student {name} earned a score " \
+          f"of {score} on the final exam."
+OR
+query = (
+    f"SELECT student_id, student_name "
+    f"FROM students "
+    f"WHERE graduation_year = {year} "
+    f"ORDER BY student_name"
+)
+
+Classes
+
+class name:
+	"""
+	description using triple quotes - are single quotes allowed? 
+	"""
+
+Method Type	First Parameter	Access Instance Data?	Access Class Data?
+Instance	self	Yes	Yes
+Class		cls	No	Yes
+Static		None	No	No
+
+first argument that is passed is defining feature of method?
+
+class naming is it Title Naming? 
+What is the meaning of None, like in comment in assign06
+mixing lots of '' and "". when does it matter, outside of printing to json? and why would teach mix them? 
+whe the return none in the ocmments? 
+van use pass in class (not function in)
+under the def input_stgudent_data, why wouldn't we pass in the key names as globals? 
+
+Change Log
+        """
+        create a new IO class funtion to get the user choice`
+        ChangeLog: (who, when, what)
+        HeidiBreslauer, 11/18/2026 created from old function, broke it ni 2
+
+        :return: string with user choice
+	"""
+
+
+
+
+
+

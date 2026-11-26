@@ -69,6 +69,16 @@ if Run_Class:
 if Run_say_goodbye:
     print("\nGood Job Heidi")
 
+# NEW STUFF
+# printing out the object which is a table of rows
+# splitting an f string:
+for each in student_objects
+print(
+    f'Student {each.first_name} '
+    f'{each.last_name} is enrolled in '
+    f'{each.course}.'
+)
+
 
 
 

@@ -8,9 +8,11 @@
 #   HeidiBreslauer, Nov 25, 2026, start over
 #   HeidiBreslauer,Nov 25. Got through the classes, check on what I left out
 #   HeidiBreslauer,Nov 26, 2026 worked on get user input into objects
+#   Heidi Breslauer, Nov 26, 2026, - created dictionary and list for student_json
 # ------------------------------------------------------------------------------------------ #
 import json # to read and write json files
 
+from Sandbox.SandboxTryExceptRaise import first_name
 
 # Define the Data Constants
 MENU: str = '''
@@ -27,9 +29,10 @@ FILE_NAME: str = "Enrollments.json"
 # Define the Data Variables
 students: list = []  # a table of student data
 menu_choice: str  # Hold the choice made by the user.
+student_objects: object = []
 
 
-# TODO Create a Person Class
+# TODO Create a Person Class2
 # TODO Add first_name and last_name properties to the constructor
 # TODO Create a getter and setter for the first_name property
 # TODO Create a getter and setter for the last_name property
@@ -134,7 +137,7 @@ class FileProcessor:
 
         :return: list
         """
-
+        #print("did I get to theis line")
         file = None
         #I commented out a bunch of stuff
         try:
@@ -145,7 +148,7 @@ class FileProcessor:
             print(json_students)
 
             # Convert the list of dictionary rows into a list of Student objects
-            student_objects = []
+
             #  convert dictionary data to student object
             for each in json_students:
                 student_object = Student(
@@ -181,12 +184,12 @@ class FileProcessor:
 
 
     @staticmethod
-    def write_data_to_file(file_name: str, student_data: list):
+    def write_data_to_file(file_name, student_objects: list):
         """ This function writes data to a json file with data from a list of dictionary rows
 
         ChangeLog: (Who, When, What)
         RRoot,1.1.2030,Created function
-        HeidiBreslauer, Nov 25, 2026
+        HeidiBreslauer, Nov 26, 2026
 
         :param file_name: string data with name of file to write to
         :param student_data: list of dictionary rows to be writen to the file
@@ -194,11 +197,21 @@ class FileProcessor:
         :return: None
         """
         file = None
+        student_json: list =[]
 
-        try:#convert Student objects into dictionaries (Done)
-            IO.output_student_and_course_names(student_data=student_data)
-            file = open(file_name, "w")
-            json.dump(student_data, file)
+        try:#convert Student objects into dictionaries
+            for each in student_objects: # create a dictionary
+                student_json_row = {
+                    "FirstName": each.first_name,
+                    "LastName": each.last_name,
+                    "CourseName": each.course_name
+                }
+                student_json.append(student_json_row)
+
+
+                print(student_json)
+                file = open(file_name, "w")
+                json.dump(student_json, file)
 
         except Exception as e:
             message = "Error: There was a problem with writing to the file.\n"
@@ -279,7 +292,7 @@ class IO:
         RRoot,1.1.2030,Created function
         Heidi Breslauer, Nov 26, 2026, modified to use objects
 
-        :param student_data: list of dictionary rows to be displayed
+        :param student_objects list of student_object rows to be displayed
 
         :return: None
         """
@@ -318,7 +331,8 @@ class IO:
             student_object=Student( first_name= student_first_name,
                        last_name= student_last_name,
                        course_name = course_name)
-
+            print(type(student_objects))
+            print(student_objects)
             student_objects.append(student_object)
 
 
@@ -329,7 +343,7 @@ class IO:
             IO.output_error_messages(message="One of the values was the correct type of data!", error=e)
         except Exception as e:
             IO.output_error_messages(message="Error: There was a problem with your entered data.", error=e)
-        return student_data
+        return student_objects
 
 
 # Start of main body
@@ -348,17 +362,17 @@ while True:
 
     # Input user data
     if menu_choice == "1":  # This will not work if it is an integer!
-        students = IO.input_student_data(student_data=students)
+        student_objects = IO.input_student_data(student_objects=students)
         continue
 
     # Present the current data
     elif menu_choice == "2":
-        IO.output_student_and_course_names(students)
+        IO.output_student_and_course_names(student_objects)
         continue
 
     # Save the data to a file
     elif menu_choice == "3":
-        FileProcessor.write_data_to_file(file_name=FILE_NAME, student_data=students)
+        FileProcessor.write_data_to_file(file_name=FILE_NAME, student_objects)
         continue
 
     # Stop the loop

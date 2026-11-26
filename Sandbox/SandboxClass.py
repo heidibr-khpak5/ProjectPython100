@@ -32,7 +32,7 @@ if Run_Class:
             # for the getter
         @property
         def first_name(self):
-            return self.__first_name.title()
+            return self.first_name.title()
 
         @first_name.setter
         def first_name(self, value:str):
@@ -48,7 +48,7 @@ if Run_Class:
         @last_name.setter
         def last_name(self,value:str):
             if value.isalpha() or value == "":
-                self.__laslt_name = value
+                self.__last_name = value
             else:
                 raise ValueError("The last name should only contain letters.")
         #create a method to override the default __str__()

@@ -5,6 +5,7 @@
 # Change Log: (Who, When, What)
 #   RRoot,1/1/2030,Created Script
 #   HeidiBreslauer, Nov 24, 2026, start
+#   HeidiBreslauer, Nov 25, 2026, start
 # ------------------------------------------------------------------------------------------ #
 import json # to read and write json files
 
@@ -32,6 +33,54 @@ menu_choice: str  # Hold the choice made by the user.
 # TODO Create a getter and setter for the last_name property
 # TODO Override the __str__() method to return Person data
 
+# defining class
+# HBreslauer Nov 25, 2026, created and tried to make it look real with indents etc
+# overrode the __str__;
+class Person:
+    # you can define the arguments here, or bring them in
+
+    # this is for constructors
+    def __init__(self, first_name: str = "",
+                 last_name: str = ""):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def __str__(self):  # override the python default
+        return f"{self.first_name}, {self.last_name}"
+
+        # for the getter
+
+    @property
+    def first_name(self):
+        return self.__first_name.title()
+
+    @first_name.setter
+    def first_name(self, value: str):
+        if value.isalpha() or value == "":
+            self.__first_name = value
+        else:
+            raise ValueError(
+                "The first name should only contain letters.")
+
+    # Now the property and setter for lastname
+    @property
+    def last_name(self):
+        return self.__last_name.title()
+
+    @last_name.setter
+    def last_name(self, value: str):
+        if value.isalpha() or value == "":
+            self.__laslt_name = value
+        else:
+            raise ValueError(
+                "The last name should only contain letters.")
+
+    # create a method to override the default __str__()
+    def __str__(self):
+        return f'{self.first_name},{self.last_name}'
+
+
+
 # TODO Create a Student class the inherits from the Person class
 # TODO call to the Person constructor and pass it the first_name and last_name data
 # TODO add a assignment to the course_name property using the course_name parameter
@@ -41,6 +90,26 @@ menu_choice: str  # Hold the choice made by the user.
 
 
 
+class Student(Person):
+    def __init__(
+        self, first_name: str ="",
+        last_name:str="", course_name: str=""
+        ):
+        super().__init__(first_name=first_name, last_name=last_name) #childs gets parent to run this part
+        self.course_name = course_name # add the new item
+
+    @property
+    def course_name(self):
+        return self.course_name.upper()
+
+
+    @course_name.setter
+    def course_name(self, value:str): # we would want to check for valid course name here
+        self.__course_name = value
+
+    def __str__(self):  # create a method to override the default __str__()
+        return f'{self.first_name},{self.last_name},{self.course_name}'
+
 # Processing --------------------------------------- #
 class FileProcessor:
     """
@@ -48,6 +117,7 @@ class FileProcessor:
 
     ChangeLog: (Who, When, What)
     RRoot,1.1.2030,Created Class
+    H Breslauer, Nov 25, 2026, coded  read from json
     """
     @staticmethod
     def read_data_from_file(file_name: str):
@@ -56,22 +126,34 @@ class FileProcessor:
 
         ChangeLog: (Who, When, What)
         RRoot,1.1.2030,Created function
+        H Breslauer, Nov 25, 2026, coded  read from json
 
         :param file_name: string data with name of file to read from
 
         :return: list
         """
-        file = None
 
+        file = None
+        #I commented out a bunch of stuff
         try:
             # Get a list of dictionary rows from the data file
             file = open(file_name, "r")
             json_students = json.load(file)
+            file.close()
 
             # Convert the list of dictionary rows into a list of Student objects
             student_objects = []
-            # TODO replace this line of code to convert dictionary data to Student data
-            #student_objects = json_students
+            # TODO convert dictionary data to Student data
+            for each in json_students:
+                student_object = Student(
+                    first_name=json_students["FirstName"],
+                    last_name= json_students["LastName"],
+                    course_name= json_students["CourseName"]
+                )
+                student_objects.append(student_object)
+
+        except FileNotFoundError as e:
+            IO.output_error_messages(message = "Error: File not found.")
 
         except Exception as e:
             IO.output_error_messages(message="Error: There was a problem with reading the file.", error=e)
@@ -81,7 +163,7 @@ class FileProcessor:
                 file.close()
         print(json_students)
         return student_objects
-    print(studlent_objects)
+    #print(studlent_objects)
 
     @staticmethod
     def write_data_to_file(file_name: str, student_data: list):
